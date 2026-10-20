@@ -110,36 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnBurstLove = document.getElementById('btn-burst-love');
   const btnScreenshot = document.getElementById('btn-screenshot');
 
-  const musicBtn = document.getElementById('music-btn');
-  const musicText = document.getElementById('music-text');
-
   let bouquetEngine = null;
   let whisperTimeout = null;
-
-  // 3. Audio Button Setup
-  if (musicBtn) {
-    musicBtn.addEventListener('click', () => {
-      const isPlaying = window.romanticAudio.toggle();
-      if (isPlaying) {
-        musicBtn.classList.add('playing');
-        musicText.textContent = "Đang phát nhạc ♫";
-      } else {
-        musicBtn.classList.remove('playing');
-        musicText.textContent = "Bật giai điệu";
-      }
-    });
-  }
 
   // 4. Open Envelope Flow
   const openEnvelope = () => {
     if (envelope.classList.contains('open')) return;
-
-    // Start romantic music on first intentional user touch
-    if (window.romanticAudio && !window.romanticAudio.isPlaying) {
-      window.romanticAudio.start();
-      musicBtn.classList.add('playing');
-      musicText.textContent = "Đang phát nhạc ♫";
-    }
 
     envelope.classList.add('open');
 
@@ -204,10 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // Play celestial burst chime chord
-      if (window.romanticAudio) {
-        window.romanticAudio.playCelestialBurst();
-      }
+
 
       // Hide Letter Modal
       letterModal.classList.add('hidden');
@@ -257,9 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
           colors: ['#ff758c', '#ffb3c6', '#00f2fe', '#70f3ff', '#ffffff']
         });
       }
-      if (window.romanticAudio) {
-        window.romanticAudio.playCelestialBurst();
-      }
+
       showRomanticWhisper();
     });
   }

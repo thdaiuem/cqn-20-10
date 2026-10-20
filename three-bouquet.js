@@ -760,9 +760,6 @@ class CelestialBouquet {
       if (dist < 6) {
         this.triggerHeartBurst(upEvent.clientX, upEvent.clientY);
         this.triggerShootingStar();
-        if (window.romanticAudio) {
-          window.romanticAudio.playCelestialBurst();
-        }
         if (window.showRomanticWhisper) {
           window.showRomanticWhisper();
         }

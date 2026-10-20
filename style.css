@@ -92,74 +92,7 @@ html, body {
   pointer-events: none;
 }
 
-/* ====================================================================
-   FLOATING AUDIO TOGGLE
-   ==================================================================== */
-.audio-control-container {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  z-index: 100;
-}
 
-.glass-pill-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  background: rgba(11, 25, 61, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 179, 198, 0.4);
-  border-radius: 50px;
-  color: #ffffff;
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 117, 140, 0.2);
-  transition: var(--transition-smooth);
-}
-
-.glass-pill-btn:hover {
-  background: rgba(26, 38, 77, 0.9);
-  border-color: var(--color-pink-primary);
-  box-shadow: 0 6px 25px rgba(255, 117, 140, 0.4);
-  transform: translateY(-2px);
-}
-
-.sound-wave {
-  display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 14px;
-}
-
-.sound-wave span {
-  width: 3px;
-  height: 4px;
-  background-color: var(--color-pink-primary);
-  border-radius: 2px;
-  transition: height 0.2s ease;
-}
-
-.glass-pill-btn.playing .sound-wave span:nth-child(1) {
-  animation: soundWave 0.8s infinite ease-in-out alternate;
-}
-.glass-pill-btn.playing .sound-wave span:nth-child(2) {
-  animation: soundWave 0.6s infinite ease-in-out alternate 0.2s;
-}
-.glass-pill-btn.playing .sound-wave span:nth-child(3) {
-  animation: soundWave 1.0s infinite ease-in-out alternate 0.1s;
-}
-.glass-pill-btn.playing .sound-wave span:nth-child(4) {
-  animation: soundWave 0.7s infinite ease-in-out alternate 0.3s;
-}
-
-@keyframes soundWave {
-  0% { height: 3px; }
-  100% { height: 14px; }
-}
 
 /* ====================================================================
    SCENE 1: THE ENVELOPE (BỨC THƯ)
