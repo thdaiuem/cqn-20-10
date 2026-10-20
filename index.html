@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gửi Em - Bó Hoa Của Những Vì Sao ✨</title>
+  <meta name="description" content="Món quà đặc biệt ngày 20/11 - Bức thư tình yêu và bó hoa 3D kết tinh từ ngàn vì sao màu xanh aqua dành tặng người con gái anh yêu.">
+
+  <!-- Google Fonts: Playfair Display, Great Vibes, Dancing Script, Quicksand, Be Vietnam Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Three.js & OrbitControls for 3D Bouquet (Local Vendor files for 100% offline guarantee) -->
+  <script src="vendor/three.min.js"></script>
+  <script src="vendor/OrbitControls.js"></script>
+  <!-- Canvas Confetti for Celebration Burst -->
+  <script src="vendor/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Background Ambient Nebula Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Sound / Music Floating Toggle -->
+  <div class="audio-control-container">
+    <button id="music-btn" class="glass-pill-btn" title="Bật/Tắt nhạc nền lãng mạn" aria-label="Bật/Tắt nhạc nền">
+      <span class="music-icon" id="music-icon">🎵</span>
+      <span class="music-text" id="music-text">Giai điệu tình yêu</span>
+      <div class="sound-wave" id="sound-wave">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </button>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- SCENE 1: THE ENVELOPE (BỨC THƯ BÍ MẬT)           -->
+  <!-- ============================================== -->
+  <section id="scene-envelope" class="scene active">
+    <div class="envelope-wrapper">
+      <div class="celestial-badge">
+        <span class="sparkle">✦</span> 20 · 11 Special Gift <span class="sparkle">✦</span>
+      </div>
+      
+      <div class="envelope-glow-aura"></div>
+      
+      <div class="envelope" id="envelope">
+        <!-- Envelope Ribbons (Nơ hồng trang trí phong bì) -->
+        <div class="envelope-ribbon-horizontal"></div>
+        <div class="envelope-ribbon-vertical"></div>
+
+        <!-- Envelope Flap Back -->
+        <div class="envelope-back"></div>
+
+        <!-- The Letter inside peaking -->
+        <div class="letter-preview" id="letter-preview">
+          <div class="letter-preview-content">
+            <span class="preview-line"></span>
+            <span class="preview-line short"></span>
+          </div>
+        </div>
+
+        <!-- Envelope Pockets -->
+        <div class="envelope-pocket-left"></div>
+        <div class="envelope-pocket-right"></div>
+        <div class="envelope-pocket-bottom"></div>
+
+        <!-- Top Flap -->
+        <div class="envelope-flap" id="envelope-flap"></div>
+
+        <!-- Wax Seal Button with cute pink-rose heart & star -->
+        <button class="wax-seal" id="wax-seal" aria-label="Nhấn để mở thư">
+          <div class="seal-inner">
+            <span class="seal-heart">💖</span>
+            <span class="seal-text">MỞ THƯ</span>
+          </div>
+          <div class="seal-ripple"></div>
+        </button>
+
+        <!-- Cute pink bow on envelope seal -->
+        <div class="envelope-cute-bow">🎀</div>
+      </div>
+
+      <div class="envelope-hint">
+        <p class="hint-text">
+          <span class="hint-hand">✨</span> Chạm vào phong bì để mở lá thư dành riêng cho em <span class="hint-hand">✨</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- SCENE 2: THE 2-PAGE LETTER (MÀU GIẤY THẬT + NƠ HỒNG) -->
+  <!-- ============================================== -->
+  <div id="letter-modal" class="letter-modal hidden">
+    <div class="letter-backdrop" id="letter-backdrop"></div>
+    
+    <div class="letter-container" id="letter-container">
+      <!-- Nơ hồng trang trí cực đáng yêu ở đỉnh bức thư -->
+      <div class="cute-pink-bow-wrapper">
+        <div class="cute-pink-bow">
+          <div class="bow-knot"></div>
+          <div class="bow-loop left"></div>
+          <div class="bow-loop right"></div>
+          <div class="bow-ribbon-tail left"></div>
+          <div class="bow-ribbon-tail right"></div>
+        </div>
+      </div>
+
+      <!-- Corner Vintage Stamps & Floral Ornaments -->
+      <div class="letter-corner-decor top-left">🌸</div>
+      <div class="letter-corner-decor top-right">🌸</div>
+      <div class="letter-corner-decor bottom-left">✨</div>
+      <div class="letter-corner-decor bottom-right">✨</div>
+
+      <!-- Letter Header -->
+      <header class="letter-header">
+        <div class="letter-stamp">
+          <span class="stamp-heart">💌</span>
+          <span class="stamp-date">20 · 11</span>
+          <span class="stamp-sub">Dành Cho Em</span>
+        </div>
+        <h2 class="letter-title" id="letter-recipient-title">Gửi Em, Vì Sao Dịu Dàng Nhất ✨</h2>
+        <div class="header-divider">
+          <span>💖 ❖ 💖</span>
+        </div>
+      </header>
+
+      <!-- Letter Content (Page 1 & Page 2) -->
+      <div class="letter-pages-viewport">
+        <!-- PAGE 1 -->
+        <div class="letter-page active" id="letter-page-1">
+          <div class="letter-body">
+            <!-- Salutation without awkward first-letter gap -->
+            <div class="letter-salutation">Em yêu à,</div>
+            <p class="letter-paragraph">
+              Hôm nay là ngày 20/11 – một ngày thật đặc biệt. Trong lòng anh, em không chỉ là người anh yêu thương nhất, mà còn là "người thầy" đã dạy anh biết cách rung động, biết kiên nhẫn, sẻ chia và trân trọng từng khoảnh khắc ngọt ngào bên nhau.
+            </p>
+            <p class="letter-paragraph">
+              Mỗi ngày có em bước vào cuộc sống của anh, thế giới này như được tô thêm những gam màu trong trẻo và diệu kỳ. Những nụ cười của em giống như ánh sáng ban mai xua tan mọi mỏi mệt, còn ánh mắt em luôn là nơi bình yên nhất mà anh muốn tìm về.
+            </p>
+            <p class="letter-paragraph">
+              Cảm ơn em vì đã luôn dịu dàng, luôn thấu hiểu và cùng anh đi qua những ngày tháng ý nghĩa. Càng ở bên em, anh lại càng nhận ra mình may mắn đến nhường nào khi có em nắm chặt tay...
+            </p>
+          </div>
+          <div class="letter-nav-container">
+            <span class="page-indicator">Trang 1 / 2 🌸</span>
+            <button id="btn-next-page" class="nav-page-btn" aria-label="Sang trang tiếp theo">
+              <span>Đọc tiếp trang sau</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- PAGE 2 -->
+        <div class="letter-page next-page" id="letter-page-2">
+          <div class="letter-body">
+            <p class="letter-paragraph">
+              Người ta bảo những điều đẹp nhất trên đời thường vô cùng hiếm hoi – giống như những ngôi sao sáng lấp lánh giữa dải ngân hà bao la. Và với anh, em chính là vì sao lấp lánh và quý giá nhất mà thượng đế đã ưu ái ban tặng cho cuộc đời anh.
+            </p>
+            <p class="letter-paragraph">
+              Nhân dịp 20/11 này, anh muốn dành tặng em một món quà thật đặc biệt. Một bó hoa không thể tìm thấy ở bất kỳ tiệm hoa nào trên Trái Đất...
+            </p>
+            <div class="highlight-quote-paper">
+              <span class="quote-flower">🌺</span>
+              <p>"Anh đã gom từng mảnh ánh sáng đẹp nhất của vũ trụ, từng vì tinh tú màu xanh aqua dịu mát, để kết thành một bó hoa vĩnh cửu dành riêng cho em."</p>
+              <span class="quote-flower">🌺</span>
+            </div>
+            <div class="letter-signature">
+              <span class="signature-label">Yêu và thương em thật nhiều,</span>
+              <span class="signature-name" id="letter-sender-name">Chàng trai của em 💙</span>
+            </div>
+          </div>
+          <div class="letter-nav-container">
+            <button id="btn-prev-page" class="nav-page-btn secondary" aria-label="Quay lại trang trước">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+              <span>Trang trước</span>
+            </button>
+            <span class="page-indicator">Trang 2 / 2 🌸</span>
+            <button id="btn-reveal-surprise" class="surprise-btn pulse-glow" aria-label="Mở món quà bất ngờ">
+              <span class="btn-sparkle">🎀</span>
+              <span>Mở Món Quà Bất Ngờ</span>
+              <span class="btn-sparkle">✨</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- SCENE 3: THE 3D CELESTIAL STAR BOUQUET         -->
+  <!-- ============================================== -->
+  <section id="scene-bouquet" class="scene hidden">
+    <!-- WebGL Canvas for 3D Bouquet -->
+    <div id="three-container"></div>
+
+    <!-- Cosmic UI Overlay & Floating Controls -->
+    <div class="bouquet-overlay">
+      <!-- Top Title Bar -->
+      <div class="bouquet-header">
+        <div class="bouquet-badge">✦ Exclusive Florist Collection ✦</div>
+        <h1 class="bouquet-title">Bó Hoa Của Những Vì Sao</h1>
+        <p class="bouquet-subtitle">Sắc hoa Blue Aqua kết tinh từ tinh tú & thắt nơ hồng ngọt ngào 🎀</p>
+      </div>
+
+      <!-- Interactive Tooltip / Hints -->
+      <div class="interaction-guide">
+        <div class="guide-item">
+          <span class="guide-icon">🔄</span>
+          <span>Xoay 360° ngắm trọn vẹn bó hoa</span>
+        </div>
+        <div class="guide-item">
+          <span class="guide-icon">🔍</span>
+          <span>Cuộn chuột để ngắm từng cánh hoa</span>
+        </div>
+        <div class="guide-item">
+          <span class="guide-icon">💖</span>
+          <span>Chạm vào hoa để thắp sáng lời yêu</span>
+        </div>
+      </div>
+
+      <!-- Romantic Whisper Toast Container -->
+      <div id="whisper-container" class="whisper-container"></div>
+
+      <!-- Bottom Floating Action Bar -->
+      <div class="bouquet-action-bar">
+        <div class="bouquet-info-tag">
+          <span class="tag-icon">💐</span>
+          <span class="tag-text">Bó Hoa Sao Blue Aqua & Nơ Hồng</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-btn-group">
+          <button id="btn-reopen-letter" class="action-icon-btn" title="Đọc lại bức thư">
+            <span class="icon">💌</span>
+            <span class="label">Đọc Lại Thư</span>
+          </button>
+          <button id="btn-burst-love" class="action-icon-btn primary" title="Thả tim sao băng">
+            <span class="icon">💙</span>
+            <span class="label">Thả Sao Băng</span>
+          </button>
+          <button id="btn-screenshot" class="action-icon-btn" title="Lưu ảnh bó hoa làm kỷ niệm">
+            <span class="icon">📸</span>
+            <span class="label">Chụp Ảnh</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="audio.js"></script>
+  <script src="three-bouquet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
